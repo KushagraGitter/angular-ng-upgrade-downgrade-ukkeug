@@ -11,6 +11,7 @@ export const ajsAppComponent = [
         a <code>UserService</code> from Angular part of the application.
       </p>
       <p>Epic!</p>
+      <button ng-click="$ctrl.showPureAngular()">Show angular Pure Angular</button>
       <button ng-click="$ctrl.showLazy()">Show/ Hide Lazy</button>
       <div ng-if="$ctrl.showLazyComponent">
         <app-demo></app-demo>
@@ -27,6 +28,10 @@ export const ajsAppComponent = [
         this.showLazy = function showLazy() {
           console.log('show hide lazy');
           this.showLazyComponent = !this.showLazyComponent;
+        };
+        this.showPureAngular = function showPureAngular() {
+          console.log('show pure Angular');
+          window.location.assign('/angular/analytics');
         };
       },
     ],
