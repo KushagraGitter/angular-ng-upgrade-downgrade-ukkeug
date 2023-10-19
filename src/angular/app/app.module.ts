@@ -15,18 +15,15 @@ import { AppRoutingModule } from './app.routing.module';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { RouterModule } from '@angular/router';
+import { TempAppModule } from './temp.app.module';
 @NgModule({
-  imports: [BrowserModule, AjsModule, AppRoutingModule, AnalyticsModule],
-  declarations: [
-    ServiceBootstrapComponent,
-    AppComponent,
-    RootComponent,
-    PageNotFoundComponent,
-  ],
+  imports: [AjsModule],
+  declarations: [ServiceBootstrapComponent, AppComponent],
   providers: [UserService],
   entryComponents: [ServiceBootstrapComponent, AppComponent],
-  bootstrap: [RootComponent],
+  bootstrap: [],
 })
 export class AppModule {
-  ngDoBootstrap() {}
+  //ngDoBootstrap() {}
 }

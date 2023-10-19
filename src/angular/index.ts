@@ -1,33 +1,60 @@
 import angular from 'angular';
-import { StaticProvider } from '@angular/core';
+import { Compiler, Injector, StaticProvider } from '@angular/core';
 import { downgradeModule } from '@angular/upgrade/static';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { AppSecondModule } from './app/app.second.module';
+import { RootModdule } from './app/root.module';
 
-const boostrapAppModule = (extraProviders: StaticProvider[]) => {
-  const platformRef = platformBrowserDynamic(extraProviders);
-  console.log('platformRef', platformRef);
-  return platformRef.bootstrapModule(AppModule);
+let rootInjectorPromise: Promise<Injector> | null = null;
+const getRootInjector = (extraProviders: StaticProvider[]) => {
+  if (!rootInjectorPromise) {
+    rootInjectorPromise = platformBrowserDynamic(extraProviders)
+      .bootstrapModule(RootModdule)
+      .then((moduleRef) => moduleRef.injector);
+  }
+  return rootInjectorPromise;
 };
 
-const boostrapAppSecondModule = (extraProviders: StaticProvider[]) => {
-  const platformRef = platformBrowserDynamic(extraProviders);
-  console.log('platformRef', platformRef);
-  return platformRef.bootstrapModule(AppSecondModule);
-};
+const boostrapAppModule = downgradeModule(
+  async (extraProviders: StaticProvider[]) => {
+    const start = performance.now();
+    const rootInjector = await getRootInjector(extraProviders);
+    const moduleAFactory = await rootInjector
+      .get(Compiler)
+      .compileModuleAsync(AppModule);
+    const end = performance.now();
+    //tslint:disable-next-line:no-console
+    console.log(`Execution time downgradedNg2AModule1: ${end - start} ms`);
+    return moduleAFactory.create(rootInjector);
+  }
+);
+
+const boostrapAppSecondModule = downgradeModule(
+  async (extraProviders: StaticProvider[]) => {
+    const start = performance.now();
+    const rootInjector = await getRootInjector(extraProviders);
+    const moduleAFactory = await rootInjector
+      .get(Compiler)
+      .compileModuleAsync(AppSecondModule);
+    const end = performance.now();
+    //tslint:disable-next-line:no-console
+    console.log(`Execution time downgradedNg2AModule1: ${end - start} ms`);
+    return moduleAFactory.create(rootInjector);
+  }
+);
 
 export class downgradedAngularAppModule {
   public static bootstrap() {
-    const donwgradedMod = downgradeModule(boostrapAppModule);
+    const donwgradedMod = boostrapAppModule;
     return donwgradedMod;
   }
 }
 
 export class downgradedAngularSecondAppModule {
   public static bootstrap() {
-    const donwgradedMod = downgradeModule(boostrapAppSecondModule);
+    const donwgradedMod = boostrapAppSecondModule;
     return donwgradedMod;
   }
 }

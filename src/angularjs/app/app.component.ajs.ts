@@ -15,7 +15,7 @@ export const ajsAppComponent = [
       <button ng-click="$ctrl.showLazy()">Show/ Hide Lazy</button>
       <div ng-if="$ctrl.showLazyComponent">
         <app-demo></app-demo>
-
+        <aj-analytics></aj-analytics>
       </div>
     </div>
   `,

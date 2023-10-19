@@ -21,6 +21,7 @@ import {
 import { AppComponent } from '../../angular/app/app.component';
 import { ServiceBootstrapComponent } from '../../angular/app/service.bootstrap.component';
 import { AppDemoComponent } from '../../angular/app/app.demo.component';
+import { AnalyticsComponent } from '../../angular/app/analytics/analytics.component';
 export const angularjsAppModule = 'ajs-app-module';
 console.log('downgraded Mod', downgradedAngularAppModule);
 const donwgradeMod1 = downgradedAngularAppModule.bootstrap();
@@ -62,6 +63,13 @@ mod
     'appDemo',
     downgradeComponent({
       component: AppDemoComponent,
+      downgradedModule: donwgradeMod2,
+    })
+  )
+  .directive(
+    'ajAnalytics',
+    downgradeComponent({
+      component: AnalyticsComponent,
       downgradedModule: donwgradeMod2,
     })
   );

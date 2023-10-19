@@ -6,12 +6,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const appRoutes: Routes = [
   {
     path: 'angularjs',
-    // loadChildren: () =>
-    //   import('./analytics/analytics.module').then((importedModule) => {
-    //     console.log(importedModule);
-    //     return importedModule.AnalyticsModule;
-    //   }),
-    component: AnalyticsComponent,
+    loadChildren: () =>
+      import('./analytics/analytics.module').then((importedModule) => {
+        console.log(importedModule);
+        return importedModule.AnalyticsModule;
+      }),
+    //component: AnalyticsComponent,
   },
   { path: '**', component: PageNotFoundComponent },
 ];
