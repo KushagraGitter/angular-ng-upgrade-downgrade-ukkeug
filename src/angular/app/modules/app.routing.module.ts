@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {
     path: 'angularjs',
     loadChildren: () =>
-      import('./analytics/analytics.module').then((importedModule) => {
+      import('../analytics/analytics.module').then((importedModule) => {
         console.log(importedModule);
         return importedModule.AnalyticsModule;
       }),

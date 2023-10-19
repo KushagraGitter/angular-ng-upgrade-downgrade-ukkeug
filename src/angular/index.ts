@@ -2,10 +2,9 @@ import angular from 'angular';
 import { Compiler, Injector, StaticProvider } from '@angular/core';
 import { downgradeModule } from '@angular/upgrade/static';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { AppModule } from './app/app.module';
-import { AppSecondModule } from './app/app.second.module';
-import { RootModdule } from './app/root.module';
+import { AppModule } from './app/modules/app.module';
+import { RootModdule } from './app/modules/root.module';
+import { AppSecondModule } from './app/modules/app.second.module';
 
 let rootInjectorPromise: Promise<Injector> | null = null;
 const getRootInjector = (extraProviders: StaticProvider[]) => {

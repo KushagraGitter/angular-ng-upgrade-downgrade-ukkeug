@@ -4,7 +4,7 @@ import { AnalyticsComponent } from './analytics.component';
 import { AnalyticsRoutingModule } from './analytics.routing.module';
 
 @NgModule({
-  imports: [AnalyticsRoutingModule],
+  imports: [],
   declarations: [AnalyticsComponent],
   // entryComponents: [AnalyticsComponent],
 })
