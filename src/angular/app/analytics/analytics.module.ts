@@ -7,6 +7,7 @@ import { AnalyticsRoutingModule } from './analytics.routing.module';
   imports: [],
   declarations: [AnalyticsComponent],
   // entryComponents: [AnalyticsComponent],
+  exports: [AnalyticsComponent],
 })
 export class AnalyticsModule {
   constructor() {}
